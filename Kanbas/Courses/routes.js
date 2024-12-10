@@ -7,10 +7,10 @@ export default function CourseRoutes(app) {
     const courses = await dao.findAllCourses();
     res.send(courses);
   });
-  app.delete("/api/courses/:courseId", (req, res) => {
+  app.delete("/api/courses/:courseId", async (req, res) => {
     const { courseId } = req.params;
-    dao.deleteCourse(courseId);
-    res.sendStatus(204);
+    const status = await dao.deleteCourse(courseId);
+    res.send(status);
   });
   app.put("/api/courses/:courseId", async (req, res) => {
     const { courseId } = req.params;
